@@ -146,24 +146,43 @@ export default function Navigation() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 + i * 0.05, type: 'spring', stiffness: 200, damping: 22 }}
                   >
-                    <button
-                      onClick={() => handleNav(it)}
-                      className="group block w-full text-left cursor-pointer"
-                      id={`nav-item-${it.key}`}
-                    >
-                      <div className="flex items-baseline gap-4">
-                        <span className="text-xs text-white/40">0{i + 1}</span>
-                        <span
-                          className={`text-2xl font-bold tracking-tight transition md:text-4xl ${
-                            currentKey === it.key ? 'text-[var(--aqua)]' : 'text-white group-hover:translate-x-2 group-hover:text-[var(--aqua)]'
-                          }`}
-                        >
-                          {it.label}
-                          {it.external && <ExternalLink className="inline-block ml-2 h-4 w-4 opacity-40" />}
-                        </span>
-                      </div>
-                      <div className="ml-10 mt-1 text-xs text-white/60">{it.hint}</div>
-                    </button>
+                    {it.external ? (
+                      <a
+                        href={it.external}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMenuOpen(false)}
+                        className="group block w-full text-left cursor-pointer"
+                        id={`nav-item-${it.key}`}
+                      >
+                        <div className="flex items-baseline gap-4">
+                          <span className="text-xs text-white/40">0{i + 1}</span>
+                          <span className="text-2xl font-bold tracking-tight transition md:text-4xl text-white group-hover:translate-x-2 group-hover:text-[var(--aqua)]">
+                            {it.label}
+                            <ExternalLink className="inline-block ml-2 h-4 w-4 opacity-40" />
+                          </span>
+                        </div>
+                        <div className="ml-10 mt-1 text-xs text-white/60">{it.hint}</div>
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => handleNav(it)}
+                        className="group block w-full text-left cursor-pointer"
+                        id={`nav-item-${it.key}`}
+                      >
+                        <div className="flex items-baseline gap-4">
+                          <span className="text-xs text-white/40">0{i + 1}</span>
+                          <span
+                            className={`text-2xl font-bold tracking-tight transition md:text-4xl ${
+                              currentKey === it.key ? 'text-[var(--aqua)]' : 'text-white group-hover:translate-x-2 group-hover:text-[var(--aqua)]'
+                            }`}
+                          >
+                            {it.label}
+                          </span>
+                        </div>
+                        <div className="ml-10 mt-1 text-xs text-white/60">{it.hint}</div>
+                      </button>
+                    )}
                   </motion.li>
                 ))}
               </ul>
