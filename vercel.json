@@ -1,0 +1,23 @@
+{
+  "routes": [
+    {
+      "src": "/gangapulse-api/(.*)",
+      "dest": "/api/gangapulse.js?path=$1"
+    },
+    {
+      "src": "/datagov-api/(.*)",
+      "dest": "/api/datagov.js?path=$1"
+    },
+    {
+      "src": "/cpcb-api/(.*)",
+      "dest": "/api/cpcb.js?path=$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
